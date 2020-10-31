@@ -2,7 +2,7 @@
 
 namespace libresultsparser
 {
-    public class Class1
+    public class ResultsParser
     {
     }
 }

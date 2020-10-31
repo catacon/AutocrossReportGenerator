@@ -13,5 +13,23 @@ namespace autocrossreportgenerator
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // Capture unhandled exceptions
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                var exception = args.ExceptionObject as Exception;
+                var message = exception.Message;
+                while (exception.InnerException != null)
+                {
+                    exception = exception.InnerException;
+                    message += Environment.NewLine + Environment.NewLine + exception.Message;
+                }
+
+                MessageBox.Show(message, "Exception");
+            };
+
+            base.OnStartup(e);
+        }
     }
 }
